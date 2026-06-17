@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: trip-survey
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: trip-survey-db
+          property: connectionString
+
+databases:
+  - name: trip-survey-db
+    plan: free
