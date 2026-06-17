@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sondage — Voyage des 40 ans 🎉</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="card">
+    <header>
+      <h1>🎉 Notre voyage des 40 ans</h1>
+      <p class="sub">On repart de zéro. Réponds à ces questions, on calcule ensemble la meilleure option (dates, budget, destination).</p>
+      <p class="sub"><a href="results.html">→ Voir les résultats en direct</a></p>
+    </header>
+
+    <form id="form">
+      <section>
+        <h2>Qui es-tu ?</h2>
+        <div class="who" id="who"></div>
+      </section>
+
+      <section>
+        <h2>1. Ton budget</h2>
+        <p class="hint">Tout compris par personne : vol + logement + restos + extras.</p>
+        <div class="range-row">
+          <input type="range" id="budget" min="300" max="1500" step="50" value="750" />
+          <output id="budgetOut" class="bigval">750 €</output>
+        </div>
+        <p class="hint">On retiendra le budget le plus bas du groupe comme plafond commun.</p>
+      </section>
+
+      <section>
+        <h2>2. Tes dates 2026</h2>
+        <p class="hint">Le point le plus important. Ajoute tes périodes — c'est ce qui débloque tout.</p>
+
+        <div class="dates-group" data-kind="preferred">
+          <h3>✅ Périodes idéales</h3>
+          <div class="ranges"></div>
+          <button type="button" class="add">+ Ajouter une période</button>
+        </div>
+        <div class="dates-group" data-kind="possible">
+          <h3>🟡 Périodes possibles (flexible)</h3>
+          <div class="ranges"></div>
+          <button type="button" class="add">+ Ajouter une période</button>
+        </div>
+        <div class="dates-group" data-kind="nogo">
+          <h3>❌ Périodes impossibles</h3>
+          <div class="ranges"></div>
+          <button type="button" class="add">+ Ajouter une période</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Qu'est-ce qui compte pour toi ?</h2>
+        <p class="hint">Note l'importance de chaque critère (0 = pas important, 5 = essentiel). C'est ça qui oriente la destination.</p>
+        <div id="weights" class="weights"></div>
+      </section>
+
+      <section>
+        <h2>4. Forme du voyage</h2>
+        <label class="q">Durée idéale
+          <select id="duration">
+            <option value="">—</option>
+            <option>3 jours</option>
+            <option>4 jours</option>
+            <option>5 jours</option>
+            <option>7 jours</option>
+          </select>
+        </label>
+        <label class="q">Logement
+          <select id="lodging">
+            <option value="">—</option>
+            <option>Chambre individuelle</option>
+            <option>Partager une chambre</option>
+            <option>Partager un grand lit, ça me va</option>
+          </select>
+        </label>
+        <label class="q">On fête aussi les 40 ans de Sarah & Candy en même temps ?
+          <select id="combined">
+            <option value="">—</option>
+            <option>Oui, on célèbre tout le monde</option>
+            <option>Non, c'est l'anniv d'Aurélie</option>
+            <option>Peu importe</option>
+          </select>
+        </label>
+      </section>
+
+      <section>
+        <h2>5. Une idée de destination ? (optionnel)</h2>
+        <textarea id="ideas" rows="2" placeholder="Marrakech, Lisbonne, sud de la France..."></textarea>
+      </section>
+
+      <button type="submit" id="submit">Envoyer mes réponses</button>
+      <p id="status" class="status"></p>
+    </form>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

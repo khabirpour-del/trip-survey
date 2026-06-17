@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Résultats — Voyage des 40 ans</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="card">
+    <header>
+      <h1>📊 Résultats en direct</h1>
+      <p class="sub" id="who"></p>
+      <p class="sub"><a href="index.html">← Remplir / modifier mes réponses</a> · <span id="refresh">se met à jour automatiquement</span></p>
+    </header>
+
+    <section id="empty" class="hidden">
+      <p class="hint">Personne n'a encore répondu. <a href="index.html">Commence ici →</a></p>
+    </section>
+
+    <section id="content" class="hidden">
+      <div class="result-block">
+        <h2>🏆 Destinations qui collent le mieux</h2>
+        <p class="hint">Calculé à partir de l'importance moyenne de vos critères. Grisé = au-dessus du budget commun.</p>
+        <div id="ranked"></div>
+      </div>
+
+      <div class="result-block">
+        <h2>📅 Fenêtres qui marchent pour tout le monde</h2>
+        <div id="dates"></div>
+      </div>
+
+      <div class="result-block">
+        <h2>💶 Budget commun (plafond contraignant)</h2>
+        <p id="budget" class="bigval"></p>
+      </div>
+
+      <div class="result-block">
+        <h2>🎚️ Vos priorités (moyenne)</h2>
+        <div id="weights"></div>
+      </div>
+
+      <div class="result-block grid2">
+        <div><h3>⏱️ Durée</h3><div id="duration"></div></div>
+        <div><h3>🛏️ Logement</h3><div id="lodging"></div></div>
+        <div><h3>🎂 Fête commune</h3><div id="combined"></div></div>
+      </div>
+
+      <div class="result-block" id="ideas-block">
+        <h2>💡 Idées proposées</h2>
+        <div id="ideas"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="results.js"></script>
+</body>
+</html>
