@@ -111,12 +111,19 @@ function computeResults(responses) {
   const weightSum = Object.values(avgWeights).reduce((s, x) => s + x, 0) || 1;
 
   // score pondere de chaque destination + filtre budget
+  const groupSize = PARTICIPANTS.length;
   const ranked = DESTINATIONS.map((d) => {
     let raw = 0;
     for (const c of CRITERIA) raw += (avgWeights[c.key] || 0) * (d.scores[c.key] || 0);
     const match = Math.round((raw / (weightSum * 5)) * 100); // 0-100%
-    const overBudget = bindingBudget != null && d.cost > bindingBudget;
-    return { ...d, match, overBudget };
+    // Villes accessibles en voiture : trajet gratuit, on retire la part
+    // transport et on ajoute seulement le parking (partage par la voiture).
+    const parkingPerPerson = d.drivable ? Math.round((d.parking || 0) / groupSize) : 0;
+    const effectiveCost = d.drivable
+      ? d.cost - (d.transport || 0) + parkingPerPerson
+      : d.cost;
+    const overBudget = bindingBudget != null && effectiveCost > bindingBudget;
+    return { ...d, match, effectiveCost, parkingPerPerson, overBudget };
   }).sort((a, b) => a.overBudget - b.overBudget || b.match - a.match);
 
   return {
