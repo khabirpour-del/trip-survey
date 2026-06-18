@@ -40,7 +40,11 @@ async function load() {
         </div>
         ${bar(d.match)}
         <p class="dest-note">${d.note}</p>
-        <p class="dest-cost">~${d.cost} € ${d.overBudget ? '· ⚠️ au-dessus du budget commun' : ''}</p>
+        <p class="dest-cost">~${d.effectiveCost ?? d.cost} €/pers${
+          d.drivable
+            ? ` · 🚗 en voiture${d.parkingPerPerson ? ` (parking ~${d.parkingPerPerson} €/pers)` : ' (parking gratuit)'}`
+            : ''
+        }${d.overBudget ? ' · ⚠️ au-dessus du budget commun' : ''}</p>
       </div>`
     )
     .join('');
