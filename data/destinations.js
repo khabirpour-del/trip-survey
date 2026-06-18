@@ -3,6 +3,14 @@
 // tout compris par personne (vol + logement + resto + extras), en euros,
 // utilise pour filtrer selon le plafond budgetaire du groupe.
 // `travel` est deja un SCORE (5 = trajet court depuis la Belgique, 0 = long).
+//
+// VOITURE : pour les villes accessibles en voiture depuis Bruxelles, on a une
+// voiture donc le trajet est "gratuit". Ajoute `drivable: true`, `transport`
+// (la part transport par personne deja incluse dans `cost`, qu'on retire car
+// le trajet est gratuit) et `parking` (cout TOTAL du parking pour le sejour,
+// partage par la voiture). Le cout effectif devient :
+//   cost - transport + parking / nb_participants.
+// Modifie ces chiffres librement si besoin.
 
 export const CRITERIA = [
   { key: 'weather',   label: 'Météo / soleil' },
@@ -60,14 +68,14 @@ export const DESTINATIONS = [
   },
   {
     id: 'amsterdam', name: 'Amsterdam', country: 'Pays-Bas', emoji: '🇳🇱',
-    cost: 700,
+    cost: 700, drivable: true, transport: 70, parking: 120,
     scores: { weather: 2, travel: 5, beach: 1, food: 4, nightlife: 5, wellness: 2, culture: 5, nature: 2 },
-    note: 'Très proche en train, citytrip culturel et festif. Météo incertaine.',
+    note: 'Citytrip culturel et festif, accessible en voiture. Météo incertaine.',
   },
   {
     id: 'spa-belgique', name: 'Spa-hôtel', country: 'Belgique', emoji: '💆',
-    cost: 450,
+    cost: 450, drivable: true, transport: 20, parking: 0,
     scores: { weather: 1, travel: 5, beach: 0, food: 4, nightlife: 1, wellness: 5, culture: 2, nature: 4 },
-    note: 'Le moins cher, à 1h de route. 100% détente, mais ni soleil ni dépaysement.',
+    note: 'Le moins cher, à 1h de route en voiture (parking gratuit). 100% détente.',
   },
 ];
